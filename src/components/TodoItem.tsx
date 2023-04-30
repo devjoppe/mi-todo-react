@@ -16,7 +16,9 @@ const TodoItem = ({todoItem, onClick}:TodoItemProp) => {
                 {todoItem.body}
             </div>
             <div className="col">
+                {todoItem.state ? <button disabled>Task completed</button> :
                 <button onClick={() => onClick(todoItem)}>Complete task</button>
+                }
                 <button>Delete</button>
             </div>
         </div>

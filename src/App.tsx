@@ -11,8 +11,13 @@ function App() {
     ])
 
     const handleState = (item:todoItem) => {
-        console.log("Klickeri klick", item)
+        // Map over the Array, check if the ID, if Yes then use the item and set the state to true.
+        const updateTodo = todoList.map((todo) =>
+        todo.id === item.id ? {...todo, state: true} : todo )
+        setTodoList(updateTodo)
     }
+
+    console.log(todoList)
 
     return (
         <div className="container">
