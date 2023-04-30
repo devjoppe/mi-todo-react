@@ -1,35 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {useState} from "react";
+import TodoItem from "./components/TodoItem.tsx";
+import {todoItem} from "./interface/todoInterface.tsx";
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    const [todoList, setTodoList] = useState<todoItem[]>([
+        {id: 1, body: 'This is what I am supposed to do', state: false},
+        {id: 2, body: 'Can I be finished with this today?', state: false},
+        {id: 3, body: 'Vacuum all the floors!', state: true},
+    ])
+
+    const handleState = (item:todoItem) => {
+        console.log("Klickeri klick", item)
+    }
+
+    return (
+        <div className="container">
+            <h2>Ongoing</h2>
+            { todoList.map((todo) => (
+                !todo.state && <TodoItem key={todo.id} todoItem={todo} onClick={handleState}/>
+            )) }
+            <h2>Done</h2>
+            { todoList.map((todo) => (
+                todo.state && <TodoItem key={todo.id} todoItem={todo} onClick={handleState} />
+            )) }
+        </div>
+    )
 }
 
 export default App
