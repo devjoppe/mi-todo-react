@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import TodoItem from "./components/TodoItem.tsx";
 import {todoItem} from "./interface/todoInterface.tsx";
 import AddTodo from "./components/AddTodo.tsx";
@@ -11,6 +11,12 @@ function App() {
         {id: 2, body: 'Can I be finished with this today?', state: false},
         {id: 3, body: 'Vacuum all the floors!', state: true},
     ])
+    const [completedTodos, setCompletedTodos] = useState(0)
+
+    useEffect(() => {
+        const checkCompleted = todoList.filter(todo => todo.state === true)
+        setCompletedTodos(checkCompleted.length)
+    }, [todoList])
 
     const handleState = (item:todoItem) => {
         // Map over the Array, check if the ID, if Yes then use the item and set the state to true.
@@ -47,7 +53,9 @@ function App() {
             { todoList.map((todo) => (
                 !todo.state && <TodoItem key={todo.id} todoItem={todo} onClick={handleState} onDelete={handleDelete}/>
             )) }
-            <h2>Done</h2>
+            <h2 className="mt-5">Done</h2>
+            {completedTodos} av {todoList.length} avklarade.
+            <hr />
             { todoList.map((todo) => (
                 todo.state && <TodoItem key={todo.id} todoItem={todo} onClick={handleState} onDelete={handleDelete} />
             )) }
