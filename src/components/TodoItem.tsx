@@ -4,8 +4,9 @@ import {todoItem} from "../interface/todoInterface.tsx";
 interface TodoItemProp {
     todoItem: todoItem
     onClick: (data:todoItem) => void
+    onDelete: (data:todoItem) => void
 }
-const TodoItem = ({todoItem, onClick}:TodoItemProp) => {
+const TodoItem = ({todoItem, onClick, onDelete}:TodoItemProp) => {
 
     return(
         <div className="row align-items-start">
@@ -19,7 +20,7 @@ const TodoItem = ({todoItem, onClick}:TodoItemProp) => {
                 {todoItem.state ? <button disabled>Task completed</button> :
                 <button onClick={() => onClick(todoItem)}>Complete task</button>
                 }
-                <button>Delete</button>
+                <button onClick={() => onDelete(todoItem)}>Delete</button>
             </div>
         </div>
     )

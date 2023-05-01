@@ -17,17 +17,22 @@ function App() {
         setTodoList(updateTodo)
     }
 
+    const handleDelete = (item:todoItem) => {
+        setTodoList(todoList.filter(todo => todo.id !== item.id))
+        console.log(todoList)
+    }
+
     console.log(todoList)
 
     return (
         <div className="container">
             <h2>Ongoing</h2>
             { todoList.map((todo) => (
-                !todo.state && <TodoItem key={todo.id} todoItem={todo} onClick={handleState}/>
+                !todo.state && <TodoItem key={todo.id} todoItem={todo} onClick={handleState} onDelete={handleDelete}/>
             )) }
             <h2>Done</h2>
             { todoList.map((todo) => (
-                todo.state && <TodoItem key={todo.id} todoItem={todo} onClick={handleState} />
+                todo.state && <TodoItem key={todo.id} todoItem={todo} onClick={handleState} onDelete={handleDelete} />
             )) }
         </div>
     )
