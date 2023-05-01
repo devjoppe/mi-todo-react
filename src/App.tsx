@@ -1,6 +1,8 @@
 import {useState} from "react";
 import TodoItem from "./components/TodoItem.tsx";
 import {todoItem} from "./interface/todoInterface.tsx";
+import AddTodo from "./components/AddTodo.tsx";
+import uniqid from 'uniqid';
 
 function App() {
 
@@ -18,14 +20,29 @@ function App() {
     }
 
     const handleDelete = (item:todoItem) => {
+        // Filter through the array and if the ID dont match, do not set it in the list.
         setTodoList(todoList.filter(todo => todo.id !== item.id))
         console.log(todoList)
+    }
+
+    const handleSubmit = (newSubmit:string) => {
+        console.log(newSubmit)
+        // Using a module to get an unique Id (call me lazy!)
+        const newId = uniqid()
+        console.log(newId)
+        const newTodo = {
+            id: newId,
+            body: newSubmit,
+            state: false
+        }
+        setTodoList([...todoList, newTodo])
     }
 
     console.log(todoList)
 
     return (
         <div className="container">
+            <AddTodo newPost={handleSubmit} />
             <h2>Ongoing</h2>
             { todoList.map((todo) => (
                 !todo.state && <TodoItem key={todo.id} todoItem={todo} onClick={handleState} onDelete={handleDelete}/>

@@ -1,5 +1,5 @@
 export interface todoItem {
-    id?: number,
+    id?: number | string,
     body?: string,
     state?: boolean
 }
