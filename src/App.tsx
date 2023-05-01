@@ -50,15 +50,15 @@ function App() {
         <div className="container">
             <AddTodo newPost={handleSubmit} />
             <h2>Ongoing</h2>
-            { todoList.map((todo) => (
+            {todoList.length != completedTodos ? todoList.map((todo) => (
                 !todo.state && <TodoItem key={todo.id} todoItem={todo} onClick={handleState} onDelete={handleDelete}/>
-            )) }
+            )) : 'No more todos' }
             <h2 className="mt-5">Done</h2>
             {completedTodos} av {todoList.length} avklarade.
             <hr />
-            { todoList.map((todo) => (
+            { completedTodos != 0 ? todoList.map((todo) => (
                 todo.state && <TodoItem key={todo.id} todoItem={todo} onClick={handleState} onDelete={handleDelete} />
-            )) }
+            )) : 'No completed todos' }
         </div>
     )
 }
