@@ -31,8 +31,8 @@ function App() {
         <div className="container">
             <AddNewTodoForm newPost={handleSubmit} />
             <TodoCounter completedTodos={completedTodos} totalTodos={todoList.length}/>
-            <TodoList title={"Ongoing"} todoList={todoList} updateList={updateList}/>
-            <TodoList title={"Completed"} todoList={todoList} updateList={updateList}/>
+            <TodoList title={"Ongoing"} todoList={todoList} updateList={updateList} isComplete={false}/>
+            <TodoList title={"Completed"} todoList={todoList} updateList={updateList} isComplete={true}/>
         </div>
     )
 }

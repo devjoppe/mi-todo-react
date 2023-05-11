@@ -6,9 +6,10 @@ interface IProp {
     title: string,
     todoList: todoItem[]
     updateList: (object:todoItem[]) => void
+    isComplete: boolean
 }
 
-const TodoList: React.FC<IProp> = ({title, todoList, updateList}) => {
+const TodoList: React.FC<IProp> = ({title, todoList, updateList, isComplete}) => {
 
     console.log("FROM COMPONENT: ", todoList)
 
@@ -17,27 +18,24 @@ const TodoList: React.FC<IProp> = ({title, todoList, updateList}) => {
     useEffect(() => {
         const checkCompleted = todoList.filter(todo => todo.state === true)
         setCompletedTodos(checkCompleted.length)
+
     }, [todoList])
 
     const handleState = (item:todoItem) => {
-        // Map over the Array, check if the ID, if Yes then use the item and set the state to true.
         const updateTodo = todoList.map((todo) => todo.id === item.id ? {...todo, state: true} : todo )
-
         updateList(updateTodo)
     }
 
     const handleDelete = (item:todoItem) => {
-        // Filter through the array and if the ID dont match, do not set it in the list.
         const listDeletedItem = (todoList.filter(todo => todo.id !== item.id))
-
         updateList(listDeletedItem)
     }
 
     return(
         <div>
             <h2>{title}</h2>
-            {todoList.length != completedTodos ? todoList.map((todo) => (
-                !todo.state && <TodoItem key={todo.id} todoItem={todo} onClick={handleState} onDelete={handleDelete}/>
+            {todoList.length != completedTodos || completedTodos != 0 ? todoList.filter(todo => todo.state === isComplete).map((todo) => (
+                <TodoItem key={todo.id} todoItem={todo} onClick={handleState} onDelete={handleDelete}/>
             )) : 'No more todos' }
         </div>
     )
