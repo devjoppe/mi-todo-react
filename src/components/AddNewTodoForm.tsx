@@ -21,8 +21,6 @@ const AddNewTodoForm:React.FC<IProp> = ({newPost}) => {
         // Use newPost(data) -> To send it to App
     }
 
-    console.log(todoInput)
-
     return(
         <div className="row mt-5">
             <form onSubmit={(e: React.FormEvent) => {
