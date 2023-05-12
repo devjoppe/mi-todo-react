@@ -1,23 +1,26 @@
-import {todoItem} from "../interface/todoInterface.tsx";
+import {apiTodos, todoItem} from "../interface/todoInterface.tsx";
+import React from "react";
 
 // This one is very important when I want to use props between components.
 interface TodoItemProp {
-    todoItem: todoItem
+    todoItem: apiTodos
     onClick: (data:todoItem) => void
     onDelete: (data:todoItem) => void
 }
-const TodoItem = ({todoItem, onClick, onDelete}:TodoItemProp) => {
+const TodoItem:React.FC<TodoItemProp> = ({todoItem, onClick, onDelete}) => {
+
+    console.log("TODO ITEM: ", todoItem)
 
     return(
         <div className="row align-items-start">
             <div className="col">
-                {!todoItem.state ? 'Ongoing' : 'Completed'}
+                {!todoItem.completed ? 'Ongoing' : 'Completed'}
             </div>
             <div className="col">
-                {todoItem.body}
+                {todoItem.todo}
             </div>
             <div className="col">
-                {todoItem.state ? <button disabled>Task completed</button> :
+                {todoItem.completed ? <button disabled>Task completed</button> :
                 <button onClick={() => onClick(todoItem)}>Complete task</button>
                 }
                 <button onClick={() => onDelete(todoItem)}>Delete</button>

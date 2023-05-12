@@ -14,8 +14,9 @@ const AddNewTodoForm:React.FC<IProp> = ({newPost}) => {
         const newId = uniqid()
         const newTodo = {
             id: newId,
-            body: data,
-            state: false
+            todo: data,
+            completed: false,
+            userId: uniqid()
         }
         newPost(newTodo)
         // Use newPost(data) -> To send it to App

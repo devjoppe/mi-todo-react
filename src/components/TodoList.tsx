@@ -1,22 +1,22 @@
 import React, {useEffect, useState} from "react";
 import TodoItem from "./TodoItem.tsx";
-import {todoItem} from "../interface/todoInterface.tsx";
+import {apiTodos, todoItem} from "../interface/todoInterface.tsx";
 
 interface IProp {
     title: string,
-    todoList: todoItem[]
+    todoList: apiTodos[]
     updateList: (object:todoItem[]) => void
     isComplete: boolean
 }
 
 const TodoList: React.FC<IProp> = ({title, todoList, updateList, isComplete}) => {
 
-    console.log("FROM COMPONENT: ", todoList)
+    console.log("FROM COMPONENT", todoList)
 
     const [completedTodos, setCompletedTodos] = useState(0)
 
     useEffect(() => {
-        const checkCompleted = todoList.filter(todo => todo.state === true)
+        const checkCompleted = todoList.filter(todo => todo.completed === true)
         setCompletedTodos(checkCompleted.length)
 
     }, [todoList])
@@ -34,7 +34,7 @@ const TodoList: React.FC<IProp> = ({title, todoList, updateList, isComplete}) =>
     return(
         <div>
             <h2>{title}</h2>
-            {todoList.length != completedTodos || completedTodos != 0 ? todoList.filter(todo => todo.state === isComplete).map((todo) => (
+            {todoList.length != completedTodos || completedTodos != 0 ? todoList.filter(todo => todo.completed === isComplete).map((todo) => (
                 <TodoItem key={todo.id} todoItem={todo} onClick={handleState} onDelete={handleDelete}/>
             )) : 'No more todos' }
         </div>

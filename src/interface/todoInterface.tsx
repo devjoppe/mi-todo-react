@@ -3,3 +3,10 @@ export interface todoItem {
     body?: string,
     state?: boolean
 }
+
+export interface apiTodos {
+    id?: number | string,
+    todo?: string,
+    completed?: boolean,
+    userId?: number | string
+}
