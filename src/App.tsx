@@ -59,9 +59,9 @@ function App() {
 
     return (
         <div className="container">
-            {isLoading && <div>Data is loading...</div>}
             {error && <div>An error occurred...</div>}
             <AddNewTodoForm newPost={handleSubmit} />
+            {isLoading && <div>DATA IS LOADING...</div>}
             { apiTodos && <TodoCounter completedTodos={completedTodos} totalTodos={apiTodos.length}/> }
             { apiTodos && <TodoList title={"Ongoing"} todoList={apiTodos} updateList={updateList} isComplete={false}/> }
             { apiTodos && <TodoList title={"Completed"} todoList={apiTodos} updateList={updateList} isComplete={true}/> }
