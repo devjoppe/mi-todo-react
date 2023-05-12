@@ -28,7 +28,6 @@ function App() {
                 }
                 const todoData = await response.json()
                 setApiTodos(todoData.todos)
-                setCompletedTodos(todoData.todos.filter((todo:apiTodos) => todo.completed === true).length)
                 setError(null)
             } catch (err) {
                 setError(err.message)
@@ -40,17 +39,19 @@ function App() {
         getData()
     }, [])
 
+    useEffect(() => {
+        if(!apiTodos) {
+            return
+        }
+        setCompletedTodos(apiTodos.filter((todo: apiTodos) => todo.completed === true).length)
+    }, [apiTodos])
+
     const updateList = (handleState:object[]) => {
-        console.log("Check state: ", handleState)
-        //setTodoList(handleState)
-        setTodoList(handleState)
+        setApiTodos(handleState)
     }
 
     const handleSubmit = (newSubmit:object) => {
-        //setApiTodos([...apiTodos, newSubmit])
-        console.log("Check the variable DATA: ", newSubmit)
         setApiTodos([...apiTodos, newSubmit])
-        //console.log("Check the variable DATA: ", apiTodos)
     }
 
     console.log("Check the variable DATA: ", apiTodos)

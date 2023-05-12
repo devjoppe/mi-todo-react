@@ -22,7 +22,7 @@ const TodoList: React.FC<IProp> = ({title, todoList, updateList, isComplete}) =>
     }, [todoList])
 
     const handleState = (item:todoItem) => {
-        const updateTodo = todoList.map((todo) => todo.id === item.id ? {...todo, state: true} : todo )
+        const updateTodo = todoList.map((todo) => todo.id === item.id ? {...todo, completed: true} : todo )
         updateList(updateTodo)
     }
 
