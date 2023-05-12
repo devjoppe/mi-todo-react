@@ -16,7 +16,7 @@ function App() {
     const[endPoint, setEndPoint] = useState('todos')
 
     useEffect(() => {
-
+        console.log("Kör useEffect")
         // Rensa data innan ny hämtning
         setApiTodos([])
         setIsLoading(true)
@@ -45,7 +45,6 @@ function App() {
 
     const changeEndPoint = (newEndPoint:string) => {
         setEndPoint(newEndPoint)
-        console.log(newEndPoint)
     }
 
     const updateList = (handleState:object[]) => {
@@ -62,10 +61,14 @@ function App() {
             <MenuButtons changeEndPoint={changeEndPoint}/>
             <h1>Limit 30</h1>
             <AddNewTodoForm newPost={handleSubmit} />
-            {isLoading && <div>DATA IS LOADING...</div>}
-            { apiTodos && !isLoading && <TodoCounter completedTodos={completedTodos} totalTodos={apiTodos.length}/> }
-            { apiTodos && !isLoading &&<TodoList title={"Ongoing"} todoList={apiTodos} updateList={updateList} isComplete={false}/> }
-            { apiTodos && !isLoading &&<TodoList title={"Completed"} todoList={apiTodos} updateList={updateList} isComplete={true}/> }
+            { isLoading && <div>DATA IS LOADING...</div> }
+            { apiTodos && !isLoading && (
+                <>
+                    <TodoCounter completedTodos={completedTodos} totalTodos={apiTodos.length}/>
+                    <TodoList title={"Ongoing"} todoList={apiTodos} updateList={updateList} isComplete={false}/>
+                    <TodoList title={"Completed"} todoList={apiTodos} updateList={updateList} isComplete={true}/>
+                </>
+                )}
         </div>
     )
 }

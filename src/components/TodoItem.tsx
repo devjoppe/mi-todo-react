@@ -8,9 +8,6 @@ interface TodoItemProp {
     onDelete: (data:todoItem) => void
 }
 const TodoItem:React.FC<TodoItemProp> = ({todoItem, onClick, onDelete}) => {
-
-    console.log("TODO ITEM: ", todoItem)
-
     return(
         <div className="row align-items-start">
             <div className="col">

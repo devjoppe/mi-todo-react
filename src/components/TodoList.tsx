@@ -11,8 +11,6 @@ interface IProp {
 
 const TodoList: React.FC<IProp> = ({title, todoList, updateList, isComplete}) => {
 
-    console.log("FROM COMPONENT", todoList)
-
     const [completedTodos, setCompletedTodos] = useState(0)
 
     useEffect(() => {
