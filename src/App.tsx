@@ -1,35 +1,32 @@
 import {useEffect, useState} from "react";
 import TodoCounter from "./components/TodoCounter.tsx";
 import TodoList from "./components/TodoList.tsx";
-import {todoItem} from "./interface/todoInterface.tsx";
 import AddNewTodoForm from "./components/AddNewTodoForm.tsx";
+import MenuButtons from "./components/MenuButtons.tsx";
+import {getApiResource} from "./services/API.ts";
 
 import {apiTodos} from "./interface/todoInterface.tsx";
 
 function App() {
 
-    const [todoList, setTodoList] = useState<todoItem[]>([
-        {id: 1, body: 'This is what I am supposed to do', state: false},
-        {id: 2, body: 'Can I be finished with this today?', state: false},
-        {id: 3, body: 'Vacuum all the floors!', state: true},
-    ])
     const [completedTodos, setCompletedTodos] = useState(0)
-
     const[apiTodos, setApiTodos] = useState<apiTodos[] | null >()
     const[error, setError] = useState(null)
     const[isLoading, setIsLoading] = useState(true)
+    const[endPoint, setEndPoint] = useState('todos')
 
     useEffect(() => {
+
+        // Rensa data innan ny hämtning
+        setApiTodos([])
+        setIsLoading(true)
+
+        // Klassisk fetch
         const getData = async () => {
             try {
-                const response = await fetch('https://dummyjson.com/todos')
-                if (!response.ok) {
-                    throw new Error(`This is an HTTP error: The status is ${response.status}`);
-                }
-                const todoData = await response.json()
-                setApiTodos(todoData.todos)
+                setApiTodos(await getApiResource(endPoint))
                 setError(null)
-            } catch (err) {
+            } catch (err:any) {
                 setError(err.message)
                 setApiTodos(null)
             } finally {
@@ -37,7 +34,7 @@ function App() {
             }
         }
         getData()
-    }, [])
+    }, [endPoint])
 
     useEffect(() => {
         if(!apiTodos) {
@@ -45,6 +42,11 @@ function App() {
         }
         setCompletedTodos(apiTodos.filter((todo: apiTodos) => todo.completed === true).length)
     }, [apiTodos])
+
+    const changeEndPoint = (newEndPoint:string) => {
+        setEndPoint(newEndPoint)
+        console.log(newEndPoint)
+    }
 
     const updateList = (handleState:object[]) => {
         setApiTodos(handleState)
@@ -54,17 +56,16 @@ function App() {
         setApiTodos([...apiTodos, newSubmit])
     }
 
-    console.log("Check the variable DATA: ", apiTodos)
-    console.log("todoList: ", todoList)
-
     return (
         <div className="container">
             {error && <div>An error occurred...</div>}
+            <MenuButtons changeEndPoint={changeEndPoint}/>
+            <h1>Limit 30</h1>
             <AddNewTodoForm newPost={handleSubmit} />
             {isLoading && <div>DATA IS LOADING...</div>}
-            { apiTodos && <TodoCounter completedTodos={completedTodos} totalTodos={apiTodos.length}/> }
-            { apiTodos && <TodoList title={"Ongoing"} todoList={apiTodos} updateList={updateList} isComplete={false}/> }
-            { apiTodos && <TodoList title={"Completed"} todoList={apiTodos} updateList={updateList} isComplete={true}/> }
+            { apiTodos && !isLoading && <TodoCounter completedTodos={completedTodos} totalTodos={apiTodos.length}/> }
+            { apiTodos && !isLoading &&<TodoList title={"Ongoing"} todoList={apiTodos} updateList={updateList} isComplete={false}/> }
+            { apiTodos && !isLoading &&<TodoList title={"Completed"} todoList={apiTodos} updateList={updateList} isComplete={true}/> }
         </div>
     )
 }
