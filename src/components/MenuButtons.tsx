@@ -7,8 +7,9 @@ interface IProps {
 const MenuButtons:React.FC<IProps> = ({changeEndPoint}) => {
     return (
         <div>
-            <button onClick={() => {changeEndPoint('todos/random')}}>Get Random Todo</button>
-            <button>Change B</button>
+            <button onClick={() => {changeEndPoint('todos')}}>Show All</button>
+            <button onClick={() => {changeEndPoint('todos?type=Work')}}>Filter Work</button>
+            <button onClick={() => {changeEndPoint('todos?type=Personal')}}>Filter Personal</button>
         </div>
     )
 }

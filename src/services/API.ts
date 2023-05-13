@@ -5,9 +5,5 @@ export const getApiResource = async (endPoint:string) => {
         throw new Error(`This is an HTTP error: The status is ${response.status}`);
     }
     const todoData = await response.json()
-    if(endPoint === 'todos/random') {
-        return [todoData]
-    } else {
-        return todoData
-    }
+    return todoData
 }
