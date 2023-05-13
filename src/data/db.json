@@ -69,6 +69,55 @@
       "completed": false,
       "userId": 19,
       "type": "Personal"
+    },
+    {
+      "id": "lhm4pype",
+      "todo": "HELLO?",
+      "completed": false,
+      "userId": "lhm4pypf",
+      "type": "Personal"
+    },
+    {
+      "id": "lhm4qayg",
+      "todo": "Sparar en ny?",
+      "completed": false,
+      "userId": "lhm4qayh",
+      "type": "Personal"
+    },
+    {
+      "id": "lhm4rcp4",
+      "todo": "Alltså detta är så coolt!",
+      "completed": false,
+      "userId": "lhm4rcp5",
+      "type": "Personal"
+    },
+    {
+      "id": "lhm4rhmt",
+      "todo": "Work Item",
+      "completed": false,
+      "userId": "lhm4rhmu",
+      "type": "Work",
+      "updateTodo": {
+        "id": "lhm4rhmt",
+        "todo": "Work Item",
+        "completed": false,
+        "userId": "lhm4rhmu",
+        "type": "Work"
+      }
+    },
+    {
+      "id": "lhm62ggd",
+      "todo": "Can I save?",
+      "completed": false,
+      "userId": "lhm62gge",
+      "type": "Personal",
+      "updateTodo": {
+        "id": "lhm62ggd",
+        "todo": "Can I save?",
+        "completed": false,
+        "userId": "lhm62gge",
+        "type": "Personal"
+      }
     }
   ]
 }

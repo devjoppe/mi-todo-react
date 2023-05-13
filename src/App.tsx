@@ -1,9 +1,10 @@
 import {useEffect, useState} from "react";
+
 import TodoCounter from "./components/TodoCounter.tsx";
 import TodoList from "./components/TodoList.tsx";
 import AddNewTodoForm from "./components/AddNewTodoForm.tsx";
 import MenuButtons from "./components/MenuButtons.tsx";
-import {getApiResource} from "./services/API.ts";
+import {getTodos, saveTodo, updateTodo} from "./services/API.ts";
 
 import {apiTodos} from "./interface/todoInterface.tsx";
 
@@ -24,7 +25,7 @@ function App() {
         // Klassisk fetch
         const getData = async () => {
             try {
-                setApiTodos(await getApiResource(endPoint))
+                setApiTodos(await getTodos(endPoint))
                 setError(null)
             } catch (err:any) {
                 setError(err.message)
@@ -47,12 +48,14 @@ function App() {
         setEndPoint(newEndPoint)
     }
 
-    const updateList = (handleState:object[]) => {
+    const updateList = (handleState:object[], todoItem:apiTodos) => {
         setApiTodos(handleState)
+        updateTodo(todoItem)
     }
 
     const handleSubmit = (newSubmit:object) => {
         setApiTodos([...apiTodos, newSubmit])
+        saveTodo(newSubmit)
     }
 
     return (

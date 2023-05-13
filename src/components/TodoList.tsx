@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import TodoItem from "./TodoItem.tsx";
-import {apiTodos, todoItem} from "../interface/todoInterface.tsx";
+import {apiTodos} from "../interface/todoInterface.tsx";
 
 interface IProp {
     title: string,
     todoList: apiTodos[]
-    updateList: (object:todoItem[]) => void
+    updateList: (object:apiTodos[], todoItem:apiTodos) => void
     isComplete: boolean
 }
 
@@ -19,14 +19,14 @@ const TodoList: React.FC<IProp> = ({title, todoList, updateList, isComplete}) =>
 
     }, [todoList])
 
-    const handleState = (item:todoItem) => {
+    const handleState = (item:apiTodos) => {
         const updateTodo = todoList.map((todo) => todo.id === item.id ? {...todo, completed: true} : todo )
-        updateList(updateTodo)
+        updateList(updateTodo, item)
     }
 
-    const handleDelete = (item:todoItem) => {
+    const handleDelete = (item:apiTodos) => {
         const listDeletedItem = (todoList.filter(todo => todo.id !== item.id))
-        updateList(listDeletedItem)
+        updateList(listDeletedItem, item)
     }
 
     return(
