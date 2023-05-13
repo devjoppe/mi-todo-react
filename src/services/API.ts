@@ -1,6 +1,6 @@
 
 export const getApiResource = async (endPoint:string) => {
-    const response = await fetch(`https://dummyjson.com/${endPoint}`)
+    const response = await fetch(`http://localhost:3000/${endPoint}`)
     if (!response.ok) {
         throw new Error(`This is an HTTP error: The status is ${response.status}`);
     }
@@ -8,6 +8,6 @@ export const getApiResource = async (endPoint:string) => {
     if(endPoint === 'todos/random') {
         return [todoData]
     } else {
-        return todoData.todos
+        return todoData
     }
 }
