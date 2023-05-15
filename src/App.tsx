@@ -24,6 +24,7 @@ function App() {
         setApiTodos([])
         setIsLoading(true)
 
+        // This could be simplified - Move to the api-function
         try {
             setApiTodos(await getTodos(endPoint))
             setError(null)
@@ -35,6 +36,7 @@ function App() {
         }
 
     }, [endPoint])
+
 
     useEffect(() => {
         console.log("############ useEffect #################")
@@ -52,6 +54,7 @@ function App() {
         setEndPoint(newEndPoint)
     }
 
+    // These function below should be run in the todoList component. Just rendering the list items, not the whole app.
     const updateList = (handleState:apiTodos[], itemTodo:apiTodos[], isDelete:boolean) => {
         setApiTodos(handleState)
         console.log("APP todo Item: ", itemTodo)

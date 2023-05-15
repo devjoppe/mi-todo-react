@@ -24,7 +24,7 @@
     {
       "id": 9,
       "todo": "Invite some friends over for a game night",
-      "completed": false,
+      "completed": true,
       "userId": 47,
       "type": "Work"
     },
@@ -96,13 +96,6 @@
       "todo": "Testar",
       "completed": false,
       "userId": "lholp1m2",
-      "type": "Personal"
-    },
-    {
-      "id": "lholqntk",
-      "todo": "Uppdaterar?",
-      "completed": false,
-      "userId": "lholqntl",
       "type": "Personal"
     },
     {
