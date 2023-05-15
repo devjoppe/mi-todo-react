@@ -1,41 +1,6 @@
 {
   "todos": [
     {
-      "id": 1,
-      "todo": "Do something nice for someone I care about",
-      "completed": true,
-      "userId": 26,
-      "type": "Personal"
-    },
-    {
-      "id": 2,
-      "todo": "Memorize the fifty states and their capitals",
-      "completed": false,
-      "userId": 48,
-      "type": "Work"
-    },
-    {
-      "id": 3,
-      "todo": "Watch a classic movie",
-      "completed": true,
-      "userId": 4,
-      "type": "Personal"
-    },
-    {
-      "id": 4,
-      "todo": "Contribute code or a monetary donation to an open-source software project",
-      "completed": false,
-      "userId": 48,
-      "type": "Work"
-    },
-    {
-      "id": 5,
-      "todo": "Solve a Rubik's cube",
-      "completed": false,
-      "userId": 31,
-      "type": "Personal"
-    },
-    {
       "id": 6,
       "todo": "Bake pastries for me and neighbor",
       "completed": false,
@@ -52,7 +17,7 @@
     {
       "id": 8,
       "todo": "Write a thank you letter to an influential person in my life",
-      "completed": true,
+      "completed": false,
       "userId": 13,
       "type": "Personal"
     },
@@ -66,15 +31,8 @@
     {
       "id": 10,
       "todo": "Have a football scrimmage with some friends",
-      "completed": false,
+      "completed": true,
       "userId": 19,
-      "type": "Personal"
-    },
-    {
-      "id": "lhm4pype",
-      "todo": "HELLO?",
-      "completed": false,
-      "userId": "lhm4pypf",
       "type": "Personal"
     },
     {
@@ -85,39 +43,39 @@
       "type": "Personal"
     },
     {
-      "id": "lhm4rcp4",
-      "todo": "Alltså detta är så coolt!",
+      "id": "lhohlvp6",
+      "todo": "Sparar en för att testa?",
       "completed": false,
-      "userId": "lhm4rcp5",
+      "userId": "lhohlvp7",
       "type": "Personal"
     },
     {
-      "id": "lhm4rhmt",
-      "todo": "Work Item",
+      "id": "lhohmhb8",
+      "todo": "Laddas sidan om?",
       "completed": false,
-      "userId": "lhm4rhmu",
-      "type": "Work",
-      "updateTodo": {
-        "id": "lhm4rhmt",
-        "todo": "Work Item",
-        "completed": false,
-        "userId": "lhm4rhmu",
-        "type": "Work"
-      }
+      "userId": "lhohmhb9",
+      "type": "Personal"
     },
     {
-      "id": "lhm62ggd",
-      "todo": "Can I save?",
+      "id": "lhojf5oh",
+      "todo": "Skapear en ny för att se vad som händer?",
+      "completed": true,
+      "userId": "lhojf5oi",
+      "type": "Personal"
+    },
+    {
+      "id": "lhojhr5s",
+      "todo": "Skriver",
+      "completed": true,
+      "userId": "lhojhr5t",
+      "type": "Personal"
+    },
+    {
+      "id": "lhojo3nz",
+      "todo": "Hej",
       "completed": false,
-      "userId": "lhm62gge",
-      "type": "Personal",
-      "updateTodo": {
-        "id": "lhm62ggd",
-        "todo": "Can I save?",
-        "completed": false,
-        "userId": "lhm62gge",
-        "type": "Personal"
-      }
+      "userId": "lhojo3o0",
+      "type": "Personal"
     }
   ]
 }

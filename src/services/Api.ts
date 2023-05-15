@@ -25,9 +25,18 @@ export const saveTodo = async (newTodo:apiTodos) => {
 }
 
 // Update data
-export const updateTodo = async (updateTodo:apiTodos) => {
-    console.log("Körs update", updateTodo.completed)
-    await axios.patch(`${BASE_URL}/todos/${updateTodo.id}`, updateTodo.completed)
+export const updateTodo = async (itemTodo:apiTodos[]) => {
+    console.log("Körs update: ", itemTodo[0].id, updateTodo)
+    await axios.patch(`${BASE_URL}/todos/${itemTodo[0].id}`, itemTodo[0])
+        .then(function (response) {
+            console.log(response);
+        })
+}
+
+// Delete data
+export const deleteTodo = async (itemTodo:apiTodos[]) => {
+    console.log("Delete: ", itemTodo)
+    await  axios.delete(`${BASE_URL}/todos/${itemTodo[0].id}`, {data: itemTodo[0]})
         .then(function (response) {
             console.log(response);
         })

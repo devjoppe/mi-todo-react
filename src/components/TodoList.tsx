@@ -5,7 +5,7 @@ import {apiTodos} from "../interface/todoInterface.tsx";
 interface IProp {
     title: string,
     todoList: apiTodos[]
-    updateList: (object:apiTodos[], todoItem:apiTodos) => void
+    updateList: (object:apiTodos[], todoItem:apiTodos[], isDelete:boolean) => void
     isComplete: boolean
 }
 
@@ -20,13 +20,17 @@ const TodoList: React.FC<IProp> = ({title, todoList, updateList, isComplete}) =>
     }, [todoList])
 
     const handleState = (item:apiTodos) => {
-        const updateTodo = todoList.map((todo) => todo.id === item.id ? {...todo, completed: true} : todo )
-        updateList(updateTodo, item)
+        //const updateTodo = todoList.map((todo) => todo.id === item.id ? {...todo, completed: true} : todo )
+        const updateTodo = todoList.map((todo) => todo.id === item.id ? {...todo, completed: !item.completed} : todo )
+        const changedTodo = updateTodo.filter(todo => todo.id === item.id)
+        console.log("Vad skrivs ut här: ", changedTodo)
+        updateList(updateTodo, changedTodo, false)
     }
 
     const handleDelete = (item:apiTodos) => {
         const listDeletedItem = (todoList.filter(todo => todo.id !== item.id))
-        updateList(listDeletedItem, item)
+        console.log("Delete in LIST: ", item)
+        updateList(listDeletedItem, [item], true)
     }
 
     return(

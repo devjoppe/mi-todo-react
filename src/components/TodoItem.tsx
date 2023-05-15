@@ -20,7 +20,7 @@ const TodoItem:React.FC<TodoItemProp> = ({todoItem, onClick, onDelete}) => {
                 {todoItem.type}
             </div>
             <div className="col">
-                {todoItem.completed ? <button disabled>Task completed</button> :
+                {todoItem.completed ? <button onClick={() => onClick(todoItem)}>Re-active task</button> :
                 <button onClick={() => onClick(todoItem)}>Complete task</button>
                 }
                 <button onClick={() => onDelete(todoItem)}>Delete</button>

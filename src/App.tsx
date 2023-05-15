@@ -4,7 +4,7 @@ import TodoCounter from "./components/TodoCounter.tsx";
 import TodoList from "./components/TodoList.tsx";
 import AddNewTodoForm from "./components/AddNewTodoForm.tsx";
 import MenuButtons from "./components/MenuButtons.tsx";
-import {getTodos, saveTodo, updateTodo} from "./services/API.ts";
+import {getTodos, saveTodo, updateTodo, deleteTodo} from "./services/Api.ts";
 
 import {apiTodos} from "./interface/todoInterface.tsx";
 
@@ -17,7 +17,7 @@ function App() {
     const[endPoint, setEndPoint] = useState('todos')
 
     useEffect(() => {
-        console.log("Kör useEffect")
+        console.log("############ Kör useEffect #################")
         // Rensa data innan ny hämtning
         setApiTodos([])
         setIsLoading(true)
@@ -48,14 +48,22 @@ function App() {
         setEndPoint(newEndPoint)
     }
 
-    const updateList = (handleState:object[], todoItem:apiTodos) => {
+    const updateList = (handleState:apiTodos[], itemTodo:apiTodos[], isDelete:boolean) => {
         setApiTodos(handleState)
-        updateTodo(todoItem)
+        console.log("APP todo Item: ", itemTodo)
+        if(!isDelete) {
+            console.log("UPDATE")
+            updateTodo(itemTodo).then(()=> {console.log("Todo updated")})
+        }
+        if(isDelete) {
+            console.log("DEEELETE")
+            deleteTodo(itemTodo).then(()=> {console.log("Todo deleted")})
+        }
     }
 
     const handleSubmit = (newSubmit:object) => {
         setApiTodos([...apiTodos, newSubmit])
-        saveTodo(newSubmit)
+        saveTodo(newSubmit).then(()=> {console.log("Save complete!")})
     }
 
     return (
