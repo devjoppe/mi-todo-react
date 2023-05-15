@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 
 import TodoCounter from "./components/TodoCounter.tsx";
 import TodoList from "./components/TodoList.tsx";
@@ -11,31 +11,35 @@ import {apiTodos} from "./interface/todoInterface.tsx";
 function App() {
 
     const [completedTodos, setCompletedTodos] = useState(0)
-    const[apiTodos, setApiTodos] = useState<apiTodos[] | null >()
+    const[apiTodos, setApiTodos] = useState<apiTodos[] | null >([])
     const[error, setError] = useState(null)
     const[isLoading, setIsLoading] = useState(true)
     const[endPoint, setEndPoint] = useState('todos')
 
-    useEffect(() => {
-        console.log("############ Kör useEffect #################")
-        // Rensa data innan ny hämtning
+    const getData = useCallback(async () => {
+
+        console.log("********** API LOADING DATA *************")
+
+        // Cleaning data -> Problem: is that I am changing the apiTodos and therefore creating a loop
         setApiTodos([])
         setIsLoading(true)
 
-        // Klassisk fetch
-        const getData = async () => {
-            try {
-                setApiTodos(await getTodos(endPoint))
-                setError(null)
-            } catch (err:any) {
-                setError(err.message)
-                setApiTodos(null)
-            } finally {
-                setIsLoading(false)
-            }
+        try {
+            setApiTodos(await getTodos(endPoint))
+            setError(null)
+        } catch (err:any) {
+            setError(err.message)
+            setApiTodos(null)
+        } finally {
+            setIsLoading(false)
         }
-        getData()
+
     }, [endPoint])
+
+    useEffect(() => {
+        console.log("############ useEffect #################")
+        getData().then(() => { console.log("Fetch from useEffect completed")})
+    }, [getData])
 
     useEffect(() => {
         if(!apiTodos) {
@@ -53,17 +57,26 @@ function App() {
         console.log("APP todo Item: ", itemTodo)
         if(!isDelete) {
             console.log("UPDATE")
-            updateTodo(itemTodo).then(()=> {console.log("Todo updated")})
+            updateTodo(itemTodo).then(()=> {
+                console.log("Update complete!")
+                getData().then(() => { console.log("Get new DB data")})
+            })
         }
         if(isDelete) {
-            console.log("DEEELETE")
-            deleteTodo(itemTodo).then(()=> {console.log("Todo deleted")})
+            deleteTodo(itemTodo).then(()=> {
+                console.log("Delete complete!")
+                getData().then(() => { console.log("Get new DB data")})
+            })
         }
     }
 
+
     const handleSubmit = (newSubmit:object) => {
         setApiTodos([...apiTodos, newSubmit])
-        saveTodo(newSubmit).then(()=> {console.log("Save complete!")})
+        saveTodo(newSubmit).then(()=> {
+            console.log("Save complete!")
+            getData().then(() => { console.log("Get new DB data")})
+        })
     }
 
     return (
