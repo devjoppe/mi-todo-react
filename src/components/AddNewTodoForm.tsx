@@ -1,52 +1,57 @@
-import {useState} from "react";
-import React from "react";
-import uniqid from "uniqid";
+import React, { useEffect, useRef, useState } from 'react'
+import { Todo } from '../types'
 
-interface IProp {
-    newPost: (data:object) => void
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface IProps {
+	onAddTodo: (todo: Todo) => void
 }
-const AddNewTodoForm:React.FC<IProp> = ({newPost}) => {
 
-    const todoOptions = ['Personal', 'Work']
+const AddNewTodoForm: React.FC<IProps> = ({ onAddTodo }) => {
+	const [newTodoTitle, setNewTodoTitle] = useState("")
+	const newTodoTitleRef = useRef<HTMLInputElement>(null)
 
-    const [todoInput, setTodoInput] = useState('')
-    const [todoType, setTodoType] = useState(todoOptions[0])
+	const handleSubmit = (e: React.FormEvent) => {
+		// stop form from submitting
+		e.preventDefault()
 
-    // Save new input data
-    const saveTodo = (data:string, type:string) => {
-        console.log(data)
-        const newId = uniqid()
-        const newTodo = {
-            id: newId,
-            todo: data,
-            completed: false,
-            userId: uniqid(),
-            type: type
-        }
-        newPost(newTodo)
-        // Use newPost(data) -> To send it to App
-    }
+		// create a new todo and set a new todos state
+		const newTodo: Todo = {
+			title: newTodoTitle,
+			completed: false,
+		}
+		onAddTodo(newTodo)   // <-- calls `addTodo()` in `App.tsx`
 
-    return(
-        <div className="row mt-5">
-            <form onSubmit={(e: React.FormEvent) => {
-                e.preventDefault();
-                saveTodo(todoInput, todoType)
-                setTodoInput('')
-                setTodoType(todoOptions[0])
-            }}>
-                <div className="input-group mb-3">
-                    <input aria-describedby="button-addon2" className="form-control" type="text" value={todoInput} onChange={e => setTodoInput(e.target.value)} required/>
-                    <select value={todoType} onChange={e => setTodoType(e.target.value)}>
-                        {todoOptions.map(item => (
-                            <option value={item} key={item}>{item}</option>
-                        ))}
-                    </select>
-                    <button id="button-addon2" className="btn btn-outline-secondary" type="submit" disabled={todoInput.length < 1}>Create todo</button>
-                </div>
-            </form>
-        </div>
-    )
+		// clear newTodoTitle state
+		setNewTodoTitle("")
+	}
+
+	// On component mount, focus on input field
+	useEffect(() => {
+		newTodoTitleRef.current?.focus()
+	}, [])
+
+	// console.log("AddNewTodoForm rendering...")
+
+	return (
+		<form onSubmit={handleSubmit} className="mb-3">
+			<div className="input-group">
+				<input
+					ref={newTodoTitleRef}
+					type="text"
+					className="form-control"
+					placeholder="Todo title"
+					onChange={e => setNewTodoTitle(e.target.value)}
+					value={newTodoTitle}
+				/>
+
+				<button
+					disabled={!newTodoTitle.trim()}
+					type="submit"
+					className="btn btn-success"
+				>Create</button>
+			</div>
+		</form>
+	)
 }
 
 export default AddNewTodoForm

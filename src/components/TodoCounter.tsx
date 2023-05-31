@@ -1,16 +1,16 @@
-import React from "react";
+import React from 'react'
 
-interface IProp {
-    completedTodos: number,
-    totalTodos: number
+interface IProps {
+	finished: number
+	total: number
 }
 
-const TodoCounter: React.FC<IProp> = ({completedTodos, totalTodos}) => {
-    return(
-        <div>
-            {completedTodos} av {totalTodos} avklarade.
-        </div>
-    )
+const TodoCounter: React.FC<IProps> = ({ finished, total }) => {
+	return (
+		<p className="status">
+			{finished} of {total} todos completed
+		</p>
+	)
 }
 
 export default TodoCounter
