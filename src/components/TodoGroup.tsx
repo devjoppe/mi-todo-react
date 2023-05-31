@@ -1,9 +1,8 @@
 import {useEffect, useState} from "react";
-import {Todo, Todos} from "../types";
+import {Todos} from "../types";
 import * as TodosAPI from "../services/TodosAPI.ts";
 import ListGroup from "react-bootstrap/ListGroup";
 import {Link} from "react-router-dom";
-import AddNewTodoForm from "./AddNewTodoForm.tsx";
 
 const TodoGroup = () => {
 
@@ -13,12 +12,6 @@ const TodoGroup = () => {
     const getTodos = async () => {
         const data = await TodosAPI.getTodos()
         setTodos(data)
-    }
-
-    // Create a new todo in the API
-     const addTodo = async (todo: Todo) => {
-        await TodosAPI.createTodo(todo)
-        getTodos()
     }
 
     /*
@@ -58,8 +51,6 @@ const TodoGroup = () => {
 
     return(
         <>
-            <AddNewTodoForm onAddTodo={addTodo} />
-            <p>HELLO?</p>
             {todos.length > 0 && (
                 <ListGroup className="todolist">
                     {todos.map(todo => (
