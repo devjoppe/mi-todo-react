@@ -14,16 +14,6 @@
       "title": "Learn stuff",
       "completed": true,
       "id": 3
-    },
-    {
-      "title": "Adding one more",
-      "completed": false,
-      "id": 4
-    },
-    {
-      "title": "Some more?",
-      "completed": false,
-      "id": 5
     }
   ]
 }
