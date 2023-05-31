@@ -2,12 +2,12 @@
   "todos": [
     {
       "title": "Learn React Bootstrap",
-      "completed": false,
+      "completed": true,
       "id": 1
     },
     {
       "title": "Learn React Router",
-      "completed": false,
+      "completed": true,
       "id": 2
     },
     {
@@ -16,24 +16,14 @@
       "id": 3
     },
     {
-      "title": "Creating a new todo",
+      "title": "Adding one more",
       "completed": false,
       "id": 4
     },
     {
-      "title": "JO CREATE",
+      "title": "Some more?",
       "completed": false,
       "id": 5
-    },
-    {
-      "title": "creating a new one?",
-      "completed": false,
-      "id": 6
-    },
-    {
-      "title": "Adding one more?",
-      "completed": false,
-      "id": 7
     }
   ]
 }

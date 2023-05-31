@@ -2,11 +2,14 @@ import {useEffect, useState} from "react";
 import {Todos} from "../types";
 import * as TodosAPI from "../services/TodosAPI.ts";
 import ListGroup from "react-bootstrap/ListGroup";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
+import {Alert} from "react-bootstrap";
 
 const TodoGroup = () => {
 
     const [todos, setTodos] = useState<Todos>([])
+    const [isDeleted, setIsDeleted] = useState(false)
+    //const [deletedTodo, setDeletedTodo] = useState("")
 
     // Get todos from api
     const getTodos = async () => {
@@ -14,43 +17,27 @@ const TodoGroup = () => {
         setTodos(data)
     }
 
-    /*
-    // Delete a todo in the api
-    const deleteTodo = async (todo: Todo) => {
-        if (!todo.id) {
-            return
-        }
-
-        // Delete todo from the api
-        await TodosAPI.deleteTodo(todo.id)
-
-        // Get all the todos from the api
-        getTodos()
-    }
-
-    // Toggle the completed status of a todo in the api
-    const toggleTodo = async (todo: Todo) => {
-        if (!todo.id) {
-            return
-        }
-
-        // Update a todo in the api
-        await TodosAPI.updateTodo(todo.id, {
-            completed: !todo.completed
-        })
-
-        // Get all the todos from the api
-        getTodos()
-    }
-    */
-
     // fetch todos when App is being mounted
     useEffect(() => {
         getTodos()
     }, [])
 
+    const queryString = useLocation().search
+    const queryParams = new URLSearchParams(queryString)
+    const todoId = queryParams.get('id')
+
+    useEffect(() => {
+        if(todoId) {
+            setIsDeleted(true)
+            //setDeletedTodo(todoId)
+        } else {
+            return
+        }
+    }, [todoId])
+
     return(
         <>
+            {isDeleted && <Alert variant="warning">Todo with ID {todoId} was deleted</Alert> }
             {todos.length > 0 && (
                 <ListGroup className="todolist">
                     {todos.map(todo => (

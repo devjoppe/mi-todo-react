@@ -1,16 +1,18 @@
+import {NavLink} from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import {Outlet} from "react-router-dom";
 
 const TodosPage = () => {
+	console.log("Does it render?")
 	return (
 		<>
 			<h1 className="mb-3">Todos</h1>
 			<Nav fill variant="tabs" defaultActiveKey="/todos">
 				<Nav.Item>
-					<Nav.Link href="/todos">List</Nav.Link>
+					<NavLink to="/todos" className="nav-link">List</NavLink>
 				</Nav.Item>
 				<Nav.Item>
-					<Nav.Link href="/todos/create">Create</Nav.Link>
+					<NavLink to="/todos/create" className="nav-link">Create</NavLink>
 				</Nav.Item>
 			</Nav>
 			<Outlet />
