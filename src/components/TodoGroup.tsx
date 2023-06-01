@@ -41,15 +41,8 @@ const TodoGroup = () => {
                 <>
                     <h2>Ongoing</h2>
                     <ListGroup className="todolist mb-5">
-                        {todos.filter(todo => !todo.completed).sort((a,b) => {
-                            if (a.title < b.title) {
-                                return -1;
-                            }
-                            if (a.title > b.title) {
-                                return 1;
-                            }
-                            return 0;
-                        }).map(todo => (
+                        {todos.filter(todo => !todo.completed).sort((a, b) =>
+                            a.title.localeCompare(b.title)).map(todo => (
                             <ListGroup.Item
                                 action
                                 as={Link}
@@ -63,15 +56,8 @@ const TodoGroup = () => {
                     </ListGroup>
                     <h2>Completed</h2>
                     <ListGroup className="todolist">
-                        {todos.filter(todo => todo.completed).sort((a,b) => {
-                            if (a.title < b.title) {
-                                return -1;
-                            }
-                            if (a.title > b.title) {
-                                return 1;
-                            }
-                            return 0;
-                        }).map(todo => (
+                        {todos.filter(todo => todo.completed).sort((a, b) =>
+                            a.title.localeCompare(b.title)).map(todo => (
                             <ListGroup.Item
                                 action
                                 as={Link}
