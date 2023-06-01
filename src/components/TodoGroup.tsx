@@ -9,7 +9,6 @@ const TodoGroup = () => {
 
     const [todos, setTodos] = useState<Todos>([])
     const [isDeleted, setIsDeleted] = useState(false)
-    //const [deletedTodo, setDeletedTodo] = useState("")
 
     // Get todos from api
     const getTodos = async () => {
@@ -39,19 +38,52 @@ const TodoGroup = () => {
         <>
             {isDeleted && <Alert variant="warning">Todo with ID {todoId} was deleted</Alert> }
             {todos.length > 0 && (
-                <ListGroup className="todolist">
-                    {todos.map(todo => (
-                        <ListGroup.Item
-                            action
-                            as={Link}
-                            key={todo.id}
-                            className={todo.completed ? 'done' : ''}
-                            to={`/todos/${todo.id}`}
-                        >
-                            {todo.title}
-                        </ListGroup.Item>
-                    ))}
-                </ListGroup>
+                <>
+                    <h2>Ongoing</h2>
+                    <ListGroup className="todolist mb-5">
+                        {todos.filter(todo => !todo.completed).sort((a,b) => {
+                            if (a.title < b.title) {
+                                return -1;
+                            }
+                            if (a.title > b.title) {
+                                return 1;
+                            }
+                            return 0;
+                        }).map(todo => (
+                            <ListGroup.Item
+                                action
+                                as={Link}
+                                key={todo.id}
+                                className={todo.completed ? 'done' : ''}
+                                to={`/todos/${todo.id}`}
+                            >
+                                {todo.title}
+                            </ListGroup.Item>
+                        ))}
+                    </ListGroup>
+                    <h2>Completed</h2>
+                    <ListGroup className="todolist">
+                        {todos.filter(todo => todo.completed).sort((a,b) => {
+                            if (a.title < b.title) {
+                                return -1;
+                            }
+                            if (a.title > b.title) {
+                                return 1;
+                            }
+                            return 0;
+                        }).map(todo => (
+                            <ListGroup.Item
+                                action
+                                as={Link}
+                                key={todo.id}
+                                className={todo.completed ? 'done' : ''}
+                                to={`/todos/${todo.id}`}
+                            >
+                                {todo.title}
+                            </ListGroup.Item>
+                        ))}
+                    </ListGroup>
+                </>
             )}
 
             {todos.length === 0 && (

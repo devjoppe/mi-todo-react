@@ -1,11 +1,6 @@
 {
   "todos": [
     {
-      "title": "Learn React Bootstrap",
-      "completed": true,
-      "id": 1
-    },
-    {
       "title": "Learn React Router",
       "completed": true,
       "id": 2
@@ -14,6 +9,41 @@
       "title": "Creating something",
       "completed": true,
       "id": 4
+    },
+    {
+      "title": "Adding some new UPDATE _ JOPPE",
+      "completed": false,
+      "id": 5
+    },
+    {
+      "title": "Testing adding some Updating?",
+      "completed": true,
+      "id": 6
+    },
+    {
+      "title": "Skapar något nytt?",
+      "completed": false,
+      "id": 7
+    },
+    {
+      "title": "Adding one more for the show UPDATE AGAIN",
+      "completed": true,
+      "id": 8
+    },
+    {
+      "title": "Skapar",
+      "completed": true,
+      "id": 9
+    },
+    {
+      "title": "Skapar något mer ?",
+      "completed": false,
+      "id": 10
+    },
+    {
+      "title": "Ba",
+      "completed": true,
+      "id": 11
     }
   ]
 }
