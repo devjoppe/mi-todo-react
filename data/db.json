@@ -11,16 +11,6 @@
       "id": 4
     },
     {
-      "title": "Adding some new UPDATE _ JOPPE",
-      "completed": false,
-      "id": 5
-    },
-    {
-      "title": "Testing adding some Updating?",
-      "completed": true,
-      "id": 6
-    },
-    {
       "title": "Skapar något nytt?",
       "completed": false,
       "id": 7
@@ -31,19 +21,19 @@
       "id": 8
     },
     {
-      "title": "Skapar",
-      "completed": true,
-      "id": 9
-    },
-    {
       "title": "Skapar något mer ?",
       "completed": false,
       "id": 10
     },
     {
-      "title": "Ba",
-      "completed": true,
+      "title": "Ba UPDATE",
+      "completed": false,
       "id": 11
+    },
+    {
+      "title": "tuutuf",
+      "completed": false,
+      "id": 12
     }
   ]
 }
